@@ -19,12 +19,22 @@
   <script>
     // ===== 問題データ =====
     const quizData = [
-      { type: "choice", question: "富士山の高さは？", options: ["3776m", "3000m", "2500m"], answer: "3776m" },
-      { type: "text", question: "日本の首都は？", answer: "とうきょう" },
-      { type: "choice", question: "日本の国鳥は？", options: ["キジ", "スズメ", "カラス"], answer: "キジ" },
-      { type: "text", question: "すしを英語で？", answer: "sushi" },
-      { type: "choice", question: "青森県の名産は？", options: ["りんご", "バナナ", "みかん"], answer: "りんご" },
-      { type: "text", question: "日本一長い川は？", answer: "しながわ" } // わざと例
+      { type: "choice", question: "お菓子のお製は？", options: ["源吉兆庵", "くろさわ", "たかまつ"], answer: "くろさわ" },
+      { type: "text", question: "掛け軸は？(ひらがなで)", answer: "わきほうねんをきざす" },
+      { type: "choice", question: "花入れは？", options: ["唐物手付籠(豊南作)", "虫籠(竹泉)", "朝鮮青磁"], answer: "唐物手付籠(豊南作)" },
+      { type: "text", question: "香合は？(ひらがな)", answer: "きねのすすきず" },
+      { type: "choice", question: "香合の作者は？", options: ["漆峯", "香雲", "秀穂"], answer: "秀穂" },
+      { type: "text", question: "正客茶碗の作者は？(ひらがな)", answer: "かたやまたかお" },
+      { type: "choice", question: "掛け軸の筆は？", options: ["太玄老師", "坐忘斎家元", "大亀老師"], answer: "坐忘斎家元" },
+      { type: "text", question: "正客茶碗の名前は？(漢字１字)", answer: "萩" },
+      { type: "choice", question: "自客茶碗は誰の写し？", options: ["如水", "仁清", "香雲"], answer:"仁清" },
+      { type: "text", question: "次客茶碗の名前は？(漢字２字)", answer: "秋草" },
+      { type: "choice", quastion: "自客茶碗の作者は？", options: ["如水", "仁清", "香雲"], answer: "如水" },
+      { type: "choice", question: "薄茶器の作者は？", options: ["漆峯", "春齋", "秀穂"], answer: "春齋" },
+      { type: "text", question: "薄茶器の名前は？(ひらがな)", answer: "つきあきくさまきえ" },
+      { type: "choice", question: "茶杓の作者は？", options: ["太玄老師", "坐忘斎家元", "大亀老師"], answer: "太玄老師" },
+      { type: "type", question: "茶杓の銘は？(漢字２字)", answer: "舞鶴" },
+      { type: "type", question: "茶会名は？(漢字、茶会まで)", answer: "盛秋茶会" }
     ];
 
     let shuffled, current, score;
