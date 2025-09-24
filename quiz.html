@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>クイズゲーム</title>
+  <style>
+    body { font-family: sans-serif; text-align: center; padding: 20px; }
+    #quiz-container { max-width: 500px; margin: auto; }
+    button { margin: 5px; padding: 10px 20px; font-size: 16px; }
+    #feedback { margin-top: 15px; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <div id="quiz-container">
+    <h1>クイズゲーム</h1>
+    <div id="game"></div>
+  </div>
+
+  <script>
+    // ===== 問題データ =====
+    const quizData = [
+      { type: "choice", question: "富士山の高さは？", options: ["3776m", "3000m", "2500m"], answer: "3776m" },
+      { type: "text", question: "日本の首都は？", answer: "とうきょう" },
+      { type: "choice", question: "日本の国鳥は？", options: ["キジ", "スズメ", "カラス"], answer: "キジ" },
+      { type: "text", question: "すしを英語で？", answer: "sushi" },
+      { type: "choice", question: "青森県の名産は？", options: ["りんご", "バナナ", "みかん"], answer: "りんご" },
+      { type: "text", question: "日本一長い川は？", answer: "しながわ" } // わざと例
+    ];
+
+    let shuffled, current, score;
+
+    // ===== ゲーム開始 =====
+    function startGame() {
+      shuffled = [...quizData].sort(() => Math.random() - 0.5).slice(0, 8);
+      current = 0;
+      score = 0;
+      showQuestion();
+    }
+
+    // ===== 問題表示 =====
+    function showQuestion() {
+      const game = document.getElementById("game");
+      const q = shuffled[current];
+
+      let html = `<h2>第${current + 1}問</h2><p>${q.question}</p>`;
+
+      if (q.type === "choice") {
+        q.options.forEach(opt => {
+          html += `<button onclick="checkAnswer('${opt}')">${opt}</button><br>`;
+        });
+      } else {
+        html += `<input type="text" id="answerInput"><br>
+                 <button onclick="checkAnswer(document.getElementById('answerInput').value)">回答</button>`;
+      }
+
+      html += `<div id="feedback"></div>`;
+      document.getElementById("game").innerHTML = html;
+    }
+
+    // ===== 答え合わせ =====
+    function checkAnswer(answer) {
+      const q = shuffled[current];
+      const feedback = document.getElementById("feedback");
+
+      if (answer.trim() === q.answer) {
+        feedback.innerHTML = "✅ 正解！";
+        score++;
+      } else {
+        feedback.innerHTML = `❌ 不正解！ 正解は「${q.answer}」です`;
+      }
+
+      feedback.innerHTML += `<br><button onclick="nextQuestion()">次の問題へ</button>`;
+    }
+
+    // ===== 次の問題へ =====
+    function nextQuestion() {
+      current++;
+      if (current < shuffled.length) {
+        showQuestion();
+      } else {
+        showResult();
+      }
+    }
+
+    // ===== 結果表示 =====
+    function showResult() {
+      const game = document.getElementById("game");
+      game.innerHTML = `<h2>結果発表</h2>
+                        <p>あなたのスコアは ${score}/${shuffled.length} です！</p>
+                        <button onclick="startGame()">もう一度プレイ</button>`;
+    }
+
+    // 初期画面
+    document.getElementById("game").innerHTML =
+      `<button onclick="startGame()">スタート</button>`;
+  </script>
+</body>
+</html>
